@@ -1,4 +1,4 @@
-# ExpensesManagementApp
+# ExpensesManagement
 
 
 ## Description
