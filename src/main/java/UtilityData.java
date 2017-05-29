@@ -8,6 +8,8 @@ import java.util.Map;
 public class UtilityData {
     public static void totalSumByRequestedCurrency(String[] splitCommands, Map<String, Double> exchangeRatesMap, Map<Date, ArrayList<Expenses>> expensesMap) {
 
+
+
         if (splitCommands.length< 2) {
             System.out.println("Invalid command format");
             return;
@@ -18,16 +20,28 @@ public class UtilityData {
         }
 
         String requestedCurrency = splitCommands[1];
-        double sum = 0.0 ;
-        double rate;
 
-        if (ifRequestedCurrencyExists(requestedCurrency, exchangeRatesMap)){
-            rate = exchangeRatesMap.get(requestedCurrency);
-        }
-        else {
+
+
+        if (!ifRequestedCurrencyExists(requestedCurrency, exchangeRatesMap)){
+
+
             System.out.println("Invalid currency format");
             return;
         }
+        System.out.println(totalSumByRequestedCurrencyCalculator(requestedCurrency,exchangeRatesMap,expensesMap));
+
+
+
+    }
+
+    public static String totalSumByRequestedCurrencyCalculator(String requestedCurrency, Map<String, Double> exchangeRatesMap, Map<Date, ArrayList<Expenses>> expensesMap) {
+
+        double sum = 0.0 ;
+        double rate;
+
+        rate = exchangeRatesMap.get(requestedCurrency);
+
         for (Map.Entry<Date, ArrayList<Expenses>> pair : expensesMap.entrySet()){
             for (Expenses e : pair.getValue()){
                 double amount = e.getAmount();
@@ -37,9 +51,8 @@ public class UtilityData {
         }
 
 
-        System.out.println(String.format("%(.2f", sum)+" "+requestedCurrency);
+        return (String.format("%(.2f", sum)+" "+requestedCurrency);
     }
-
 
 
     public static void showListExpenses(Map<Date, ArrayList<Expenses>> expensesMap) {
@@ -105,7 +118,7 @@ public class UtilityData {
         return exchangeRatesMap.containsKey(splitCommand);
     }
 
-    private static double parsingStringToAmount(String splitCommand) {
+   public static double parsingStringToAmount(String splitCommand) {
         double amount;
         try {
             amount = Double.parseDouble(splitCommand);
@@ -138,7 +151,7 @@ public class UtilityData {
         }
     }
 
-    private static Date parsingStringToDate(String splitCommand)  {
+    public static Date parsingStringToDate(String splitCommand)  {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date date;
 

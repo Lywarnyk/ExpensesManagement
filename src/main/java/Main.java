@@ -6,10 +6,11 @@ public class Main {
         Map<String,  Double> exchangeRatesMap = ExchangeRates.getCurrentExchangeRateFromOnlineSource();
         Map<Date,ArrayList<Expenses>> expensesMap = new TreeMap<>();
         Scanner sc = new Scanner(System.in);
-        boolean running = true;
-        while (running) {
+
+        while (true) {
             String commandLine = sc.nextLine();
-            running = CommandProcessing.chooseCommand(commandLine, exchangeRatesMap, expensesMap);
+            if (commandLine.equals("stop")) break;
+            CommandProcessor.chooseCommand(commandLine, exchangeRatesMap, expensesMap);
         }
 
     }
