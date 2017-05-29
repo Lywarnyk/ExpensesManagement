@@ -21,5 +21,9 @@ public class Expenses {
     public double getAmount() {
         return amount;
     }
+
+    public String getProduct() {
+        return product;
+    }
 }
 
