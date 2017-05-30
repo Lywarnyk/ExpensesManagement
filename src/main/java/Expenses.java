@@ -1,7 +1,7 @@
 public class Expenses {
-      private double amount;
-   private String currency;
-   private String product;
+    private double amount;
+    private String currency;
+    private String product;
 
     public Expenses(double amount, String currency, String product){
         this.amount = amount;

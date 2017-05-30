@@ -118,7 +118,7 @@ public class UtilityData {
         return exchangeRatesMap.containsKey(splitCommand);
     }
 
-   public static double parsingStringToAmount(String splitCommand) {
+    public static double parsingStringToAmount(String splitCommand) {
         double amount;
         try {
             amount = Double.parseDouble(splitCommand);

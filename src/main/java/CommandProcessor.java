@@ -7,7 +7,6 @@ public class CommandProcessor {
     public static void chooseCommand(String commandLine, Map<String, Double> exchangeRatesMap, Map<Date, ArrayList<Expenses>> expensesMap) {
         String[] splitCommands = commandLine.split(" ");
 
-
         switch (splitCommands[0]) {
             case "add":
                 UtilityData.addExpensesToMap(splitCommands, exchangeRatesMap, expensesMap);
