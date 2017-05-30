@@ -1,9 +1,7 @@
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by lywar on 26.05.2017.
- */
+
 public class CurrencyRates {
     private String base;
     private String date;

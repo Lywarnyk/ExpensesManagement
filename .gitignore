@@ -1,6 +1,9 @@
 .idea/
 target/
-.xml
-/pom.xml
-.iml
-/ExpensesManagement.iml
+
+
+ExpensesManag.iml
+lib/hamcrest-core-1.3.jar
+lib/junit-4.12.jar
+pom.xml
+src/main/resources/
