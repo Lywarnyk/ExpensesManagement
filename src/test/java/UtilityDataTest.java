@@ -11,9 +11,8 @@ import static org.junit.Assert.*;
 
 public class UtilityDataTest {
 
-    public static Map<String, Double> exchangeRates;
-    public static TreeMap<Date, ArrayList<Expenses>> expectedResultExpensesMap;
-    public static TreeMap <Date, ArrayList<Expenses>> actualResultExpensesMap;
+    private static Map<String, Double> exchangeRates;
+    private static TreeMap <Date, ArrayList<Expenses>> actualResultExpensesMap;
 
     @Before
     public void setUp() throws ParseException {
@@ -29,12 +28,7 @@ public class UtilityDataTest {
         ArrayList<Expenses> secondList = new ArrayList<>();
         secondList.add(new Expenses(10.0, "EUR", "Apple juice"));
         actualResultExpensesMap.put(parsingStringToDate("2017-10-11"),secondList);
-
-        //creating actual result map
-        expectedResultExpensesMap = new TreeMap<>(actualResultExpensesMap);
     }
-
-
 
     @Test
     public void totalSumByRequestedCurrencyCalculatorTest() {
@@ -52,34 +46,30 @@ public class UtilityDataTest {
         String[] splitCommands = {"add","2020-12-12","50","USD", "Cheese"};
         UtilityData.addExpensesToMap(splitCommands, exchangeRates, actualResultExpensesMap);
         assertTrue(actualResultExpensesMap.containsKey(date));
+        assertEquals(50, actualResultExpensesMap.get(date).get(0).getAmount(), 0.001);
+        assertEquals("USD", actualResultExpensesMap.get(date).get(0).getCurrency());
+        assertEquals("Cheese", actualResultExpensesMap.get(date).get(0).getProduct());
 
-       Expenses expenses = new Expenses(50,"USD", "Cheese");
-        assertEquals(expenses.getAmount(), actualResultExpensesMap.get(date).get(0).getAmount(), 0.001);
-        assertEquals(expenses.getCurrency(), actualResultExpensesMap.get(date).get(0).getCurrency());
-        assertEquals(expenses.getProduct(), actualResultExpensesMap.get(date).get(0).getProduct());
     }
 
     @Test
     public void clearListByDateTest() throws ParseException {
-        String[] splitCommands = {"clear","2017-10-10"};
-        Date date = parsingStringToDate(splitCommands[1]);
+
+        String[] splitCommands = new String[]{"clear", "2017-10-10"};
         UtilityData.clearListByDate(splitCommands, actualResultExpensesMap);
-        expectedResultExpensesMap.remove(date);
-        assertEquals(expectedResultExpensesMap, actualResultExpensesMap);
-        assertFalse(actualResultExpensesMap.containsKey(date));
+        assertFalse(actualResultExpensesMap.containsKey(parsingStringToDate("2017-10-10")));
     }
 
     @After
     public void tearDownForUtilityTests(){
-        expectedResultExpensesMap = null;
         actualResultExpensesMap = null;
     }
 
     private Date parsingStringToDate(String s) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date date;
-            date = sdf.parse(s);
-            return date;
+        date = sdf.parse(s);
+        return date;
     }
 
 }
