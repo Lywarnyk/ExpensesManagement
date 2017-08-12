@@ -33,3 +33,5 @@ where:
 ## Possible currencies
 
 AUD, BGN, BRL, CAD, CHF, CNY, CZK, DKK, GBP, HKD, HRK, HUF, IDR, ILS, INR, JPY, KRW, MXN, MYR, NOK, NZD, PHP, LN, RON, RUB, EUR, SEK, SGD, THB, TRY, USD, ZAR.
+
+
