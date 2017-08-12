@@ -1,4 +1,6 @@
-public class Expenses {
+import java.io.Serializable;
+
+public class Expenses implements Serializable {
     private double amount;
     private String currency;
     private String product;
@@ -25,5 +27,6 @@ public class Expenses {
     public String getProduct() {
         return product;
     }
+
 }
 

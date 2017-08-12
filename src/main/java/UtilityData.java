@@ -1,6 +1,8 @@
+import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.Map;
 
@@ -164,5 +166,39 @@ public class UtilityData {
         }
 
 
+    }
+
+    public static void saveMapToFile(Map<Date, ArrayList<Expenses>> expensesMap) {
+        try {
+            FileOutputStream fileOut = new FileOutputStream("expenses.ser");
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(expensesMap);
+            out.close();
+            fileOut.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static Map<Date, ArrayList<Expenses>> getMapFromFile() {
+        Map<Date, ArrayList<Expenses>> map = null;
+        try{
+            FileInputStream fileIn = new FileInputStream("expenses.ser");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            map = (Map<Date, ArrayList<Expenses>>) in.readObject();
+            in.close();
+            fileIn.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("there is no expenses in the file");
+            return map;
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+        }
+        return map;
     }
 }
